@@ -1,3 +1,11 @@
 h1, p {
   font-family: Lato;
 }
+
+.panel, pre {
+  background: none;
+}
+
+.hidden {
+  display: none;
+}

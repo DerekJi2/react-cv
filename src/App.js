@@ -1,33 +1,17 @@
 
 import React, { Component } from 'react';
-import { render } from 'react-dom';
 import $ from 'jquery';
 import Prism from 'prismjs';
 import PrismCode from 'react-prism';
 import './prism.css';
 import './App.css';
+import Resume from './Resume';
 
 class App extends Component {
   prismlang;
-
-  showStyle(n) {
-    var style = this.style();
-    if (n > style.length) return style; 
-    var subStyle = style.substr(0, n);
-    this.setState({
-      name: 'Sir/Madam',
-      fullStyle: subStyle,
-      subStyle: subStyle
-    });
-    this.goBottom();
-    if (subStyle.indexOf("highlight") > 0) {
-      this.prismlang = "language-css";
-      Prism.highlightAll();
-    }
-    setTimeout(() => {
-      this.showStyle(n+1);
-    }, 50);
-  }
+  resumePanelVisible = false;
+  delay = 10;
+  resumeService = new Resume();
   
   constructor() {
     super();
@@ -37,78 +21,98 @@ class App extends Component {
     this.state = {
       name: '',
       fullStyle: '',
-      subStyle: ''
+      subStyle: '',
+
+      fullResume: '',
+      subResume: '',
     };    
   }
 
-  goBottom() {
-    $(".editor-panel").scrollTop(1000);
+  
+
+  renderStylePanel() {
+    return new Promise((resolve, reject) =>{
+      let showStyle = async (n) => {
+        var style = this.resumeService.style();
+        // if (n > 30) { resolve(); return; }
+        if (n > style.length) resolve(); 
+        var subStyle = style.substr(0, n);
+        this.setState({
+          name: 'Sir/Madam',
+          fullStyle: subStyle,
+          subStyle: subStyle
+        });
+        this.goBottom(".editor-panel");
+
+        if (subStyle.indexOf("highlight") > 0) {
+          this.prismlang = "language-css";
+          Prism.highlightAll();
+        }
+
+        if (subStyle.indexOf("resume editor") > 0) {
+          this.resumePanelVisible = true;
+        }
+
+        setTimeout(() => {
+          showStyle(n+1);
+        }, this.delay);
+      };
+
+      showStyle(1);
+    });
+  }
+
+  
+
+  renderResumePanel() {
+    return new Promise((resolve, reject) =>{
+      let showResume = async (n) => {
+        var resume = this.resumeService.resume();
+        if (n > resume.length) resolve(); 
+        var subResume = resume.substr(0, n);
+        this.setState({
+          fullResume: subResume,
+          subResume: subResume
+        });
+        this.goBottom(".resume-panel");
+        setTimeout(() => {
+          showResume(n+1);
+        }, this.delay);
+      };
+
+      showResume(1);
+    });
+  }
+
+  renderPanels = async () => {
+    await this.renderStylePanel();
+
+    await this.renderResumePanel();
+  }
+
+  goBottom(panel) {
+    $(panel).scrollTop(1000);
   }
 
   componentDidMount() {
-    // Prism.highlightAll();   
-
-    this.showStyle(1);
-  }
-
-  style() {
-    return `
-/* 
-  My name is Derek. 
-  Let's make things interesting. Here we go!
-*/
-
-/* Transitions to all elements */
-* {
-  transition: all .1s;
-}
-/* Set colors */
-html {
-  color: rgb(222,222,222); background: rgb(0,64,64);
-}
-.container{
-  height:70vh;
-  margin:0;
-}
-
-/* Set boders */
-.editor-panel {
-  padding: .5em;
-  border: 1px solid;
-  margin: .5em;
-  overflow: auto;
-  width: 50vw; height: 70vh;
-  background: rgb(20,20,20);
-}
-/* highlight */
-.token.selector{ color: rgb(130,150,0); }
-.token.property{ color: rgb(190,140,0); }
-.token.punctuation{ color: blue; }
-.token.function{ color: rgb(40,160,150); }
-
-/* 3D effects. Looking cool */
-html{
-  perspective: 1000px;
-}
-.editor-panel {
-  position: fixed; left: 0; top: 0;
-  -webkit-transition: none;
-  transition: none;
-  -webkit-transform: rotateY(10deg) translateZ(-100px) ;
-          transform: rotateY(10deg) translateZ(-100px) ;
-}
-`;
-  }
+    this.renderPanels();
+  } 
 
   render() {
     return (
       <div className="container">
       <style dangerouslySetInnerHTML={{__html: this.state.fullStyle}}></style>
-        <div className="editor-panel">
+        <div className="panel editor-panel">
           <pre>
             <PrismCode className={this.prismlang}>
               {this.state.subStyle}
             </PrismCode>
+          </pre>
+        </div>
+
+        <div className={`panel resume-panel ${this.resumePanelVisible ? "" : "hidden"}`}>
+          <pre>
+                {this.state.subResume}
           </pre>
         </div>
       </div>
