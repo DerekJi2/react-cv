@@ -25,6 +25,8 @@ class App extends Component {
 
       fullResume: '',
       subResume: '',
+
+      resumeLoaded: false,
     };    
   }
 
@@ -68,7 +70,7 @@ class App extends Component {
     return new Promise((resolve, reject) =>{
       let showResume = async (n) => {
         var resume = this.resumeService.resume();
-        if (n > resume.length)  { resolve(); return; }
+        if (n > resume.length)  { this.setState({resumeLoaded: true}); resolve(); return; }
         var subResume = resume.substr(0, n);
         this.setState({
           fullResume: subResume,
@@ -113,6 +115,7 @@ class App extends Component {
         <div className={`panel resume-panel ${this.resumePanelVisible ? "" : "hidden"}`}>
           <pre>
                 {this.state.subResume}
+                <a href="https://github.com/DerekToop/react-cv" target="_blank" className={this.state.resumeLoaded ? "" : "hidden"}>I am on Github!</a>
           </pre>
         </div>
       </div>

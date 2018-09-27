@@ -1,7 +1,7 @@
 class Resume {
 
     style() {
-        return `/* Hi, this is Derek. Here's my introduction. */
+        return `/* Hi, this is Derek. */
 
 /* Transitions to all elements */
 * {
@@ -60,7 +60,7 @@ html {
           transform: rotateY(-10deg) translateZ(-100px) ;
 }
 
-/* Here we go. */
+/* Here's my introduction. */
 `;
     }
 
@@ -115,8 +115,6 @@ Phone: 0433 7xx 2xx
 
 Source Code
 -----------
-https://github.com/DerekToop/react-cv
-
 `;
     }
 }
