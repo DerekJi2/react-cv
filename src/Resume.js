@@ -1,7 +1,7 @@
 class Resume {
 
     style() {
-        return `/* Hi, this is Derek. Here's my resume. */
+        return `/* Hi, this is Derek. Here's my introduction. */
 
 /* Transitions to all elements */
 * {
@@ -47,7 +47,7 @@ html {
 }
 
 /* Create a resume editor */
-.resume-panel{
+.resume-panel {
   position: fixed; right: 0; top: 0;
   padding: .5em;  margin: .5em;
   width: 49vw; height: 70vh;
@@ -65,48 +65,42 @@ html {
     }
 
     resume() {
-        return `Derek Ji (Full-stack .Net Developer, Adelaide)
+        return `Derek Ji (Adelaide, SA, Australia)
 ====
 
-Technologies and Programming Languages
-====
-Database
---------
-    - Mircosoft SQL Server: T-SQL, Stored Procedure, View
-    - MySQL
+  As a full stack .Net developer with 10+ years commercial development experience, 
+currently I'm working based on:
+  * ASP.NET, C#, MVC5/Razor, .NET Core, Webforms
+  * Javascript/JQuery, AJAX & Promise, Bootstrap, CSS, LESS/SCSS, HTML
+  * ReactJS, Kendo UI (for AngularJS), NodeJS
+  * SQL Server & T-SQL, MySQL
+  * Azure
+  * GIT, SVN
+  * SDLC and Agile/Scrum
+  * OOP & S.O.L.I.D. principles
 
-Back-end
---------
-    - ASP.NET C#
-    - MVC5 & Razor
-    - .NET Core
-    - RESTful Web API
-    - Webforms
-
-Front-end
----------
-    - Javascript, JQuery, AJAX
-    - Typescript
-    - ReactJS, Kendo UI
-    - NodeJS
-    - Bootstrap
-    - CSS, LESS, SCSS
-
-Others
-------
-    - PHP: CodeIgniter
-    - OS: Windows, Linux, Solaris
-    - Cloud: Azure
-    - Version control: Git, SVN
+My core strengths include, but are not limited to the following:
+   Able to work independently within a team with great problem-solving skills 
+    & Can-Do attitudes.
+   Excellent Project Management and Conflict Management skills for timely 
+    deliveries with high quality.
+   Good team player with excellent communication and documentation skills
+   Continuously striving to improve all practices, routines and systems.  
     
 Work Experience
 ---------------
-1. Novaworks Inc.
-2. Toop & Toop
-3. Lambda Scientific PTY LTD.
-4. Huawei Technologies
-5. Nortel
-6. NetEase Entertainment
+1. .Net Developer
+        NovaWorks 
+2. Senior Software Developer
+        Toop & Toop Pty Ltd
+3. Technical Lead
+        Lambda Scientific PTY LTD.
+4. Technical Sales
+        Huawei Technologies Co., Ltd.
+5. Developer / Team Leader
+        Nortel Network Inc. (TSX: NT.TO / NYSE: NT)
+6. Developer
+        NetEase Entertainment (NASDAQ: NTES)
 
 Education
 ---------

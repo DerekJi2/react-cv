@@ -35,7 +35,7 @@ class App extends Component {
       let showStyle = async (n) => {
         var style = this.resumeService.style();
         // if (n > 30) { resolve(); return; }
-        if (n > style.length) resolve(); 
+        if (n > style.length) { resolve(); return; }
         var subStyle = style.substr(0, n);
         this.setState({
           name: 'Sir/Madam',
@@ -68,7 +68,7 @@ class App extends Component {
     return new Promise((resolve, reject) =>{
       let showResume = async (n) => {
         var resume = this.resumeService.resume();
-        if (n > resume.length) resolve(); 
+        if (n > resume.length)  { resolve(); return; }
         var subResume = resume.substr(0, n);
         this.setState({
           fullResume: subResume,
