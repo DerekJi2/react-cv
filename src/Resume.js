@@ -64,6 +64,12 @@ html {
 `;
     }
 
+    styleForHtml() {
+        return `/*
+Errr ... it should be HTML version, isn't it?
+/*`;
+    }
+
     resume() {
         return `Derek Ji (Adelaide, SA, Australia)
 ====
@@ -110,11 +116,12 @@ Education
 
 Contact Me!
 -----------
-Email: syfool@hotmail.com
-Phone: 0433 7xx 2xx
+Email: <img src="/img/email.png" class="secure" />
+Phone: <img src="/img/phone.png" class="secure" />
 
 Source Code
 -----------
+<a href="https://github.com/DerekToop/react-cv" target="_blank">I am on Github!</a>
 `;
     }
 }

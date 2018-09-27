@@ -9,3 +9,10 @@ h1, p {
 .hidden {
   display: none;
 }
+
+.resume-panel pre img.secure {
+  height: 16px;
+  position: relative;
+  top: 5px;
+  transform: rotate(-2deg);
+}

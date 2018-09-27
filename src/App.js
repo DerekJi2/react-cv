@@ -86,10 +86,40 @@ class App extends Component {
     });
   }
 
+  renderResumeAsHtml() {
+    return new Promise((resolve, reject) =>{
+      let showStyle = async (n) => {
+        var style = this.resumeService.style();
+        var styleForHtml = this.resumeService.styleForHtml();
+        if (n > styleForHtml.length) { 
+          var text = $(".resume-panel pre").text();
+          $(".resume-panel pre").html(text);
+          resolve(); 
+          return; 
+        }
+        var subStyle = style + styleForHtml.substr(0, n);
+        this.setState({
+          name: 'Sir/Madam',
+          fullStyle: subStyle,
+          subStyle: subStyle
+        });
+        this.goBottom(".editor-panel");
+
+        setTimeout(() => {
+          showStyle(n+1);
+        }, this.delay);
+      };
+
+      showStyle(1);
+    });
+  }
+
   renderPanels = async () => {
     await this.renderStylePanel();
 
     await this.renderResumePanel();
+
+    await this.renderResumeAsHtml();
   }
 
   goBottom(panel) {
@@ -114,8 +144,7 @@ class App extends Component {
 
         <div className={`panel resume-panel ${this.resumePanelVisible ? "" : "hidden"}`}>
           <pre>
-                {this.state.subResume}
-                <a href="https://github.com/DerekToop/react-cv" target="_blank" className={this.state.resumeLoaded ? "" : "hidden"}>I am on Github!</a>
+                {this.state.subResume}                
           </pre>
         </div>
       </div>
