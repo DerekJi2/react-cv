@@ -38,3 +38,29 @@
     -->
   </body>
 </html>
+
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+  function log() {
+    var url = "log.php";
+    var msg = location.href;
+    var payload = { 
+		  msg: msg,
+      type: "CV",
+      level: "INFO"
+    };
+    console.log(payload);
+    var promise = $.post(url, payload);
+    console.log("Log sent");
+    promise.done( (response) => {
+      console.log(response);
+    });
+    
+  }
+
+  log();
+
+</script>
